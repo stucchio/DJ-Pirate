@@ -53,10 +53,10 @@ class command:
 
 
     def voldown(self):
-        get_mpd().volume( get_mpd().status().volume - 5)
+        get_mpd().volume( 5 * int((get_mpd().status().volume - 5)/5))
 
     def volup(self):
-        get_mpd().volume( get_mpd().status().volume + 5)
+        get_mpd().volume( 5 * int((get_mpd().status().volume + 5)/5))
 
 
 if __name__ == "__main__":
