@@ -40,9 +40,6 @@
 
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
-	        xmlresponse = httpRequest.responseXML;
-		root = xmlresponse.getElementsByTagName('root').item(0);
-
 	        document.getElementById("playlist").innerHTML = httpRequest.responseText;
 		stripe('playlist', 'rgb(245,245,245)', 'rgb(220,220,255)')
 
