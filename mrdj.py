@@ -15,13 +15,15 @@ def get_mpd(host="192.168.1.5", port="6600"):
 def get_status_xml():
     song = get_mpd().getCurrentSong()
     mpd_status = get_mpd().status()
-    status_str = "<?xml version=\"1.0\" ?> \n" + "<root>"
+    status_str = "<?xml version=\"1.0\" ?> \n<root>\n"
     if song:
-        status_str += "<currentsong>" + song.title + ", by " + song.artist + "</currentsong>"
+        status_str += "<currentsong>" + song.title + ", by " + song.artist + "</currentsong>\n"
     else:
-        status_str += "<currentsong>" + "No song playing" + "</currentsong>"
-    status_str += "<state>"+ str(mpd_status.state) + "</state>"
-    status_str += "<volume>" + str(mpd_status.volume) + "</volume>" + "</root>"
+        status_str += "<currentsong>" + "No song playing" + "</currentsong>\n"
+    status_str += "<state>"+ str(mpd_status.state) + "</state>\n"
+    status_str += "<volume>" + str(mpd_status.volume) + "</volume>"
+    status_str += "<playlistposition>" + str(get_mpd().getPlaylistPosition()[0]) + "</playlistposition>\n"
+    status_str += "</root>\n"
     return status_str
 
 def get_playist_xml():
