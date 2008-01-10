@@ -1,0 +1,26 @@
+#songlist {
+}
+
+#songlist li {
+    padding: 3px 8px;
+    border-left: 1px solid #D9D9D9;
+}
+
+#songlist li.currentsong {
+    background-color: rgb(255,245,200);
+	}
+
+#songlist li.lastmodifiedsong {
+    background-color: rgb(200,200,255);
+}
+
+#currentsong {
+    background:rgb(256,0,0);
+}
+
+playingsong {
+	        font-size: large;
+}
+
+volume {
+}

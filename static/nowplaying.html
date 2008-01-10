@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Mr. D.J.</title>
+    <script type="text/javascript" language="javascript">
+      function updateStatus() {
+        var httpRequest;
+	document.getElementById("playingsong").innerHTML = "Loading...";
+        if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+            httpRequest = new XMLHttpRequest();
+            if (httpRequest.overrideMimeType) {
+                httpRequest.overrideMimeType('text/xml');
+            }
+        }
+        else if (window.ActiveXObject) { // IE
+            try {
+                httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                catch (e) {
+                           try {
+                                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                               }
+                             catch (e) {}
+                          }
+                                       }
+
+        if (!httpRequest) {
+            alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,true); };
+        httpRequest.open('GET', '../simpleajax/status', true);
+	httpRequest.send('');
+    }
+
+    function updateStatusCallback(httpRequest,repeat) {
+
+        if (httpRequest.readyState == 4) {
+            if (httpRequest.status == 200) {
+	        xmlresponse = httpRequest.responseXML;
+		root = xmlresponse.getElementsByTagName('root').item(0);
+
+	        document.getElementById("playingsong").innerHTML = xmlresponse.getElementsByTagName('currentsong')[0].childNodes[0].nodeValue;
+
+	        document.getElementById("volume").innerHTML = 'Volume: ' + xmlresponse.getElementsByTagName('volume')[0].childNodes[0].nodeValue;
+
+		// Change text on Play/Pause Button
+                if (xmlresponse.getElementsByTagName('state')[0].childNodes[0].nodeValue == '2'){
+		document.getElementById("playpausebutton").value = "Pause";
+		}else {
+		document.getElementById("playpausebutton").value = "Play ";
+		}
+		if (repeat){
+		    setTimeout("updateStatus();", 25000);
+		    }
+
+            } else {
+	        document.getElementById("playingsong").innerHTML = "Check your network connection";
+		if (repeat){
+		    setTimeout("updateStatus();", 5000);
+		    }
+            }
+        }
+    }
+
+    function runCommand(cmd){
+        var httpRequest;
+
+        if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+            httpRequest = new XMLHttpRequest();
+            if (httpRequest.overrideMimeType) {
+                httpRequest.overrideMimeType('text/xml');
+            }
+        }
+        else if (window.ActiveXObject) { // IE
+            try {
+                httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+                catch (e) {
+                           try {
+                                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+                               }
+                             catch (e) {}
+                          }
+                                       }
+
+        if (!httpRequest) {
+	    alert('Giving up :( Cannot create an XMLHTTP instance');
+            return false;
+        }
+        httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,false); };
+        httpRequest.open('GET', '../simpleajax/command/' + cmd, true);
+	httpRequest.send('');
+    }
+
+</script>
+
+
+  </head>
+  <body onLoad="updateStatus();">
+    <h1 id="main">Mr. D.J.</h1>
+    <playingsong id="playingsong">Loading...</playingsong>
+
+    <form>
+
+    </form>
+      <table>
+      <tr>
+	<td> <input type="button" value="Previous" onClick="runCommand('prev'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
+	<td> <input type="button" id="playpausebutton" value="Play/Pause" onClick="runCommand('pause'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
+	<td> <input type="button" value="Next" onClick="runCommand('next'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
+	<td> <input type="button" value="Stop" onClick="runCommand('stop'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
+      </tr>
+      </table>
+      <table>
+	<tr>
+	<td> <input type="button" value="-" onClick="runCommand('voldown'); document.getElementById('volume').innerHTML = 'Loading...';"> </input> </td>
+	<td> <input type="button" value="+" onClick="runCommand('volup');  document.getElementById('volume').innerHTML = 'Loading...'; "> </input> </td>
+	<td> <volume id="volume"> Loading...</volume> % </td>
+      </tr>
+      </table>
+
+
+  </body>
+</html>
