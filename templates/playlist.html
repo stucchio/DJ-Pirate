@@ -1,0 +1,6 @@
+$def with (playlist)
+
+  $for s in playlist:
+      <li id="song$(s[0])">
+	$(s[1].title), by $(s[1].artist).
+      </li>
