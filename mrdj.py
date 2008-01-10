@@ -28,7 +28,7 @@ def get_status_xml():
 
 def get_playist_xml():
     playlist = get_mpd().playlist()
-    return render.playlist(enumerate(playlist))
+    return render.playlist(enumerate(playlist), get_mpd().getPlaylistPosition()[0])
 
 
 class index:

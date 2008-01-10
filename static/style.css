@@ -6,16 +6,21 @@
     border-left: 1px solid #D9D9D9;
 }
 
-#songlist li.currentsong {
-    background-color: rgb(255,245,200);
-	}
-
-#songlist li.lastmodifiedsong {
-    background-color: rgb(200,200,255);
+#playlist li.even {
+    background-color: rgb(235,235,235);
 }
 
-#currentsong {
-    background:rgb(256,0,0);
+#playlist li.odd {
+    background-color: rgb(235,235,255);
+}
+
+
+#playlist li.currentsong {
+    background-color: rgb(100,100,255);
+	}
+
+#playlist li.lastmodifiedsong {
+    background-color: rgb(200,200,255);
 }
 
 playingsong {

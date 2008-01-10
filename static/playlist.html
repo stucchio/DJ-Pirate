@@ -41,7 +41,7 @@
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
 	        document.getElementById("playlist").innerHTML = httpRequest.responseText;
-		stripe('playlist', 'rgb(245,245,245)', 'rgb(220,220,255)')
+		//stripe('playlist', 'rgb(245,245,245)', 'rgb(220,220,255)')
 
 		if (repeat){
 		    setTimeout("updatePlaylist();", 25000);
