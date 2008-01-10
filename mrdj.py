@@ -4,8 +4,10 @@ import mpdclient
 urls = ( '/', 'index',
          '/simpleajax/status', 'status',
          '/simpleajax/command/(.*)', 'command',
+         '/simpleajax/playlist','playlist',
          )
 
+render = web.template.render('templates/')
 
 def get_mpd(host="192.168.1.5", port="6600"):
     return mpdclient.MpdController(host=host,port=6600)
@@ -22,6 +24,11 @@ def get_status_xml():
     status_str += "<volume>" + str(mpd_status.volume) + "</volume>" + "</root>"
     return status_str
 
+def get_playist_xml():
+    playlist = get_mpd().playlist()
+    return render.playlist(enumerate(playlist))
+
+
 class index:
     def GET(self):
         web.seeother("static/frames.html")
@@ -29,6 +36,10 @@ class index:
 class status:
     def GET(self):
         print get_status_xml()
+
+class playlist:
+    def GET(self):
+        print get_playist_xml()
 
 class command:
     commands = [ "prev", "next", "shuffle", "stop", "clear"]
