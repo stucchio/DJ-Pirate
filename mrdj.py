@@ -24,11 +24,7 @@ def get_status_xml():
 
 class index:
     def GET(self):
-        print "Hello, world!"
-
-class index:
-    def GET(self):
-        print "Hello, world!"
+        web.seeother("static/frames.html")
 
 class status:
     def GET(self):
