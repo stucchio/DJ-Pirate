@@ -57,8 +57,11 @@ class command:
             get_mpd().play()
 
     def pause(self):
-        if get_mpd().status().state < 2:
+        state = get_mpd().status().state
+        if  state < 2:
             get_mpd().play(get_mpd().getPlaylistPosition()[0])
+        if state == 2:
+            get_mpd().pause()
         else:
             get_mpd().play()
 
