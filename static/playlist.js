@@ -34,7 +34,7 @@ function updatePlaylist() {
     httpRequest.send('');
 }
 
-function updatePlaylistCallback(httpRequest,repeat) {
+function updatePlaylistCallback(httpRequest,repeat,nowplaying,playlist) {
 
     if (httpRequest.readyState == 4) {
         if (httpRequest.status == 200) {

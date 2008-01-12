@@ -6,7 +6,7 @@ Import("misc.js");
 
 function updateStatus(nowplaying, playlist) {
     var httpRequest;
-    document.getElementById("playingsong").innerHTML = "Loading...";
+    nowplaying.getElementById("playingsong").innerHTML = "Loading...";
     if (window.XMLHttpRequest) { // Mozilla, Safari, ...
         httpRequest = new XMLHttpRequest();
         if (httpRequest.overrideMimeType) {

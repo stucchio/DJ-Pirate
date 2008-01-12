@@ -20,7 +20,7 @@ function updateStatusCallback(httpRequest,repeat, nowplaying, playlist) {
             stylePlaylist(xmlresponse.getElementsByTagName('playlistposition')[0].childNodes[0].nodeValue, -1, playlist);
 
             if (repeat){ //Now try this again in 20,000 microseconds
-                setTimeout("updateStatus();", 20000);
+                setTimeout("updateStatus(document, parent.playlist.document);", 20000);
             }
 
         } else {

@@ -19,3 +19,8 @@
 #playlist li.selectedsong {
     background-color: rgb(255,175,175);
 }
+
+playingsong { font-weight: bold;
+	      text-transform: capitalize;
+	      font-size: "large";
+}

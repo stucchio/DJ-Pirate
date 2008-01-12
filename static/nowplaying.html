@@ -7,7 +7,6 @@
 
   </head>
   <body onLoad="updateStatus(document, parent.playlist.document);">
-    <h1 id="main">Mr. D.J.</h1>
     <playingsong id="playingsong">Loading...</playingsong>
 
     <form>
@@ -22,10 +21,15 @@
       </tr>
       </table>
       <table>
-	<tr>
+      <tr>
 	<td> <input type="button" value="-" onClick="runCommand('voldown');"> </input> </td>
 	<td> <input type="button" value="+" onClick="runCommand('volup');"> </input> </td>
 	<td> <volume id="volume"> Loading...</volume> % </td>
+      </tr>
+      </table>
+      <table>
+      <tr>
+	<td> <input type="button" value="Shuffle" onClick="runCommand('shuffle'); parent.playlist.document.getElementById('playlist').innerHTML='Shuffling...';"> </input> </td>
       </tr>
       </table>
 
