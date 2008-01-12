@@ -3,21 +3,19 @@
     border-left: 1px solid #D9D9D9;
 }
 
-#songlist li.currentsong {
-    background-color: rgb(255,245,200);
+#playlist li.currentsong {
+    background-color: rgb(175,175,255);
 	}
 
-#songlist li.lastmodifiedsong {
-    background-color: rgb(200,200,255);
-}
+#playlist li.even {
+    background-color: rgb(255,255,255);
+	}
 
-#currentsong {
-    background:rgb(256,0,0);
-}
+#playlist li.odd {
+    background-color: rgb(220,220,240);
+	}
 
-playingsong {
-	        font-size: large;
-}
 
-volume {
+#playlist li.lastmodifiedsong {
+    background-color: rgb(255,175,175);
 }
