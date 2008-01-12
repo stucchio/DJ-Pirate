@@ -1,3 +1,9 @@
+Import = function(uri){
+    document.write('<script src="' + uri +'" type="text/javascript"></script>\n');
+}
+
+Import("misc.js");
+
 function updatePlaylist() {
     var httpRequest;
     //document.getElementById("playlist").innerHTML = "Loading...";

@@ -1,3 +1,9 @@
+Import = function(uri){
+    document.write('<script src="' + uri +'" type="text/javascript"></script>\n');
+}
+
+Import("misc.js");
+
 function updateStatus() {
     var httpRequest;
     document.getElementById("playingsong").innerHTML = "Loading...";
@@ -47,7 +53,7 @@ function updateStatusCallback(httpRequest,repeat) {
             }
 
             //Update playlist
-            stylePlaylist(xmlresponse.getElementsByTagName('playlistposition')[0].childNodes[0].nodeValue);
+            stylePlaylist(xmlresponse.getElementsByTagName('playlistposition')[0].childNodes[0].nodeValue, -1, parent.playlist.document);
 
             if (repeat){ //Now try this again in 20,000 microseconds
                 setTimeout("updateStatus();", 20000);
@@ -61,54 +67,3 @@ function updateStatusCallback(httpRequest,repeat) {
         }
     }
 }
-
-function stylePlaylist(songnum) {
-    var even = false;
-
-    // obtain a reference to the desired list
-    var lst = parent.playlist.document.getElementById('playlist');
-    if (! lst) { return; }
-
-    // by definition, lists can have multiple elements, so we'll have to get all my children (i.e. <li>'s)
-    var lbodies = lst.getElementsByTagName("li");
-
-    for (var h = 0; h < lbodies.length; h++) { //Now loop over list elements, set class appropriately
-        lbodies[h].className = even ? "even" : "odd";
-        even =  ! even;
-        if (h+1 == ( parseInt(songnum) )){
-            lbodies[h].className = 'currentsong';
-        }
-    }
-}
-
-
-function runCommand(cmd){
-    var httpRequest;
-
-    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-        httpRequest = new XMLHttpRequest();
-        if (httpRequest.overrideMimeType) {
-            httpRequest.overrideMimeType('text/xml');
-        }
-    }
-    else if (window.ActiveXObject) { // IE
-        try {
-            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            try {
-                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            catch (e) {}
-        }
-    }
-
-    if (!httpRequest) {
-        alert('Giving up :( Cannot create an XMLHTTP instance');
-        return false;
-    }
-    httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,false); };
-    httpRequest.open('GET', '../simpleajax/command/' + cmd, true);
-    httpRequest.send('');
-}
-
