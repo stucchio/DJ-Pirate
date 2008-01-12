@@ -1,8 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html>
   <title>Mr. D.J.</title>
-  <frameset rows="200,1*" border="0">
-    <frame src="nowplaying.html" frameborder="0" name="nowplaying" scrolling="no"> </frame>
-    <frame src="playlist.html" frameborder="0" name="playlist" noresize="noresize" scrolling="yes"> </frame>
+  <frameset rows="20%,1*" border="3">
+    <frame src="nowplaying.html" frameborder="3" name="nowplaying" scrolling="no"> </frame>
+    <frameset cols="1*, 350" border="3">
+      <frame src="" border="3" name="search" scrolling="yes"> </frame>
+      <frame src="playlist.html" name="playlist" scrolling="yes"> </frame>
+    </frameset>
   </frameset>
 </html>
