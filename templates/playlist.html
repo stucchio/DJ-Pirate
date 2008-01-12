@@ -2,15 +2,15 @@ $def with (playlist, nowplaying)
 
 $for s in playlist:
     $if (s[0] + 1) == nowplaying:
-        <li id="song$(s[0] + 1)" class="currentsong">
+        <li id="song$(s[0])" class="currentsong" onDblClick="playSong($(s[0]));">
 	  $(s[1].title), by $(s[1].artist).
 	</li>
     $else:
         $if (s[0] % 2) == 0:
-            <li id="song$(s[0] + 1)" class="odd">
+            <li id="song$(s[0])" class="odd" onDblClick="playSong($(s[0]));">
 	      $(s[1].title), by $(s[1].artist).
 	    </li>
 	$else:
-            <li id="song$(s[0] + 1)" class="even">
+            <li id="song$(s[0])" class="even" onDblClick="playSong($(s[0]));">
 	      $(s[1].title), by $(s[1].artist).
 	    </li>

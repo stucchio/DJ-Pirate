@@ -6,7 +6,7 @@
     <script src="nowplaying.js" type="text/javascript">
 
   </head>
-  <body onLoad="updateStatus();">
+  <body onLoad="updateStatus(document, parent.playlist.document);">
     <h1 id="main">Mr. D.J.</h1>
     <playingsong id="playingsong">Loading...</playingsong>
 

@@ -53,3 +53,39 @@ function updatePlaylistCallback(httpRequest,repeat) {
         }
     }
 }
+
+function playSong(songnum){
+    song = document.getElementById("song"+songnum);
+    playSongXmlRequest(songnum, parent.nowplaying.document, document);
+    stylePlaylist(-1,songnum,document);
+}
+
+function playSongXmlRequest(songnum, nowplaying, playlist) {
+    var httpRequest;
+    nowplaying.getElementById("playingsong").innerHTML = "Loading...";
+    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+        httpRequest = new XMLHttpRequest();
+        if (httpRequest.overrideMimeType) {
+            httpRequest.overrideMimeType('text/xml');
+        }
+    }
+    else if (window.ActiveXObject) { // IE
+        try {
+            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e) {
+            try {
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch (e) {}
+        }
+    }
+
+    if (!httpRequest) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,true, nowplaying,playlist); };
+    httpRequest.open('GET', '../simpleajax/playsong/' + songnum, true);
+    httpRequest.send('');
+}

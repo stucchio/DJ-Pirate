@@ -16,6 +16,6 @@
 	}
 
 
-#playlist li.lastmodifiedsong {
+#playlist li.selectedsong {
     background-color: rgb(255,175,175);
 }

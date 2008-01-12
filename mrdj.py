@@ -4,7 +4,8 @@ import mpdclient
 urls = ( '/', 'index',
          '/simpleajax/status', 'status',
          '/simpleajax/command/(.*)', 'command',
-         '/simpleajax/playlist','playlist',
+         '/simpleajax/playlist', 'playlist',
+         '/simpleajax/playsong/([0-9]*)', 'playsong',
          )
 
 render = web.template.render('templates/')
@@ -42,6 +43,11 @@ class status:
 class playlist:
     def GET(self):
         print get_playist_xml()
+
+class playsong:
+    def GET(self,songnum):
+        get_mpd().play(int(songnum))
+        print get_status_xml()
 
 class command:
     commands = [ "prev", "next", "shuffle", "stop", "clear"]
