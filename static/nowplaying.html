@@ -29,7 +29,10 @@
       </table>
       <table>
       <tr>
-	<td> <input type="button" value="Shuffle" onClick="runCommand('shuffle'); parent.playlist.document.getElementById('playlist').innerHTML='Shuffling...';"> </input> </td>
+	<td> <input type="button" value="Shuffle" onClick="runCommand('shuffle');
+							   parent.playlist.document.getElementById('playlist').innerHTML='Shuffling...';
+							   updatePlaylist(document, parent.playlist.document, false);
+							   "> </input> </td>
       </tr>
       </table>
 
