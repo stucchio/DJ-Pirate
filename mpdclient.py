@@ -1105,6 +1105,46 @@ class MpdController(MpdConnection):
 
     return listing
 
+  def search_for_songs(self, table, *words):
+    """
+    search(table, *words) -> list of paths of matching music files / directories
+
+    table should be any of album|artist|title|filename, and words should be
+    search phrases to search for in the given table.  Any music files or
+    directories found matching the criteria are passed back in a list of their
+    paths.
+
+    examples:
+      search("filename", "blah.mp3") -> list of all filenames containing
+                                        "blah.mp3"
+      search("artist", "acdc","mozart") -> list of all files with an artist
+                                           of acdc or mozart
+    """
+
+    if not isinstance(table, str) or table not in _searchTables:
+      raise ValueError, "table must be album|artist|title|filename"
+
+    if not words:
+      raise ValueError, "no search terms given"
+
+    table = searchTableSwapType(table)
+
+    found = []
+
+    for word in words:
+
+      if not isinstance(word, str):
+        raise ValueError, "all words must be strings"
+
+      try:
+        self.sendSearchCommand(table, word)
+        for s in self.iterInfoEntities():
+          found += [s, ]
+      finally:
+        self.finishCommand()
+    return found
+
+
   def search(self, table, *words):
     """
     search(table, *words) -> list of paths of matching music files / directories
@@ -1146,6 +1186,46 @@ class MpdController(MpdConnection):
 
     return found
 
+  def ls_full(self, dirs=[""], onlyFiles=False, onlyDirs=False):
+    """
+    ls(dirs) -> list of directories and music files found in *dirs
+
+    Basically works like find(1) works, except not recursively.  You pass the
+    names of some directories (relative to the root of mpd's music dir), and
+    whatever music files and/or directories are found, are returned in a list.
+
+    If no arguments are passed, all directories and music files directly inside
+    of mpd's music dir are returned.
+
+    examples:
+      ls() -> list of all music files / directories directly under mpd's music
+              dir
+      ls(["acdc"]) -> list of all files / directories directly under
+                      <mpd_music_dir>/acdc
+    """
+
+    listing = []
+
+    for adir in dirs:
+
+      if not isinstance(adir, str):
+        raise ValueError, "all arguments must be strings"
+
+      try:
+        self.sendLsInfoCommand(adir)
+
+        if onlyDirs:
+          listing.extend(self._getAllOfType(Directory))
+        elif onlyFiles:
+          listing.extend(self._getAllOfType(Song))
+        else:
+          listing.extend(self._getAllOfType(Song, Directory))
+
+      finally:
+        self.finishCommand()
+
+    return listing
+
   def ls(self, dirs=[""], onlyFiles=False, onlyDirs=False):
     """
     ls(dirs) -> list of directories and music files found in *dirs
@@ -1185,6 +1265,30 @@ class MpdController(MpdConnection):
         self.finishCommand()
 
     return listing
+
+  def _getAllOfType(self, *types):
+    """
+    _getAllOfType(*types) -> attrs matching types
+
+    After sending a command to mpd, you can use this to loop through all
+    returned info entities, and get only the ones that are an instance of
+    a type in *types.
+
+    examples: look around :)
+    """
+
+    all = []
+
+    for entity in self.iterInfoEntities():
+
+      for t in types:
+        if isinstance(entity, t):
+          all.append(entity)
+          break
+
+    return all
+
+
 
   def _getAllAttrsOfType(self, attr, *types):
     """
