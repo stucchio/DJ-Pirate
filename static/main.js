@@ -1,3 +1,5 @@
+var playlistqueue = 0;
+
 function updateStatus(nowplaying, playlist) {
     var httpRequest;
     nowplaying.getElementById("playingsong").innerHTML = "Loading...";
@@ -78,6 +80,13 @@ function updateStatusCallback(httpRequest,repeat, nowplaying, playlist) {
 
             //Update playlist
             stylePlaylist(xmlresponse.getElementsByTagName('playlistposition')[0].childNodes[0].nodeValue, -1, playlist);
+
+	    //If playlistqueue is changed, update the playlist
+	    current_playlistqueue = xmlresponse.getElementsByTagName('playlistqueue')[0].childNodes[0].nodeValue;
+	    if (playlistqueue != current_playlistqueue){
+		playlistqueue = current_playlistqueue;
+		updatePlaylist(nowplaying, playlist, false);
+	    }
 
             if (repeat){ //Now try this again in 20,000 microseconds
                 setTimeout("updateStatus(document, parent.playlist.document);", 20000);

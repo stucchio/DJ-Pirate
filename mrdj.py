@@ -23,7 +23,8 @@ def get_status_xml():
     else:
         status_str += "<currentsong>" + "No song playing" + "</currentsong>\n"
     status_str += "<state>"+ str(mpd_status.state) + "</state>\n"
-    status_str += "<volume>" + str(mpd_status.volume) + "</volume>"
+    status_str += "<volume>" + str(mpd_status.volume) + "</volume>\n"
+    status_str += "<playlistqueue>" + str(mpd_status.playlist) + "</playlistqueue>\n"
     status_str += "<playlistposition>" + str(get_mpd().getPlaylistPosition()[0]) + "</playlistposition>\n"
     status_str += "</root>\n"
     return status_str
