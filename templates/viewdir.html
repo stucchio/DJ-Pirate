@@ -25,9 +25,15 @@ $def with (songs, dirs)
     </ul>
 
     <h2> Directories </h2>
+    <p><a href="/viewdir/"> / (Root Directory, Home) </a></p>
     <ul id="dirlist">
       $for d in dirs:
-          <li> <a href="$(d.path)"> $(d.path) </a> </li>
+          <li>
+	    <input type="button" value="Add" onClick="addToPlaylist('$(d.path)');
+						      parent.playlist.document.getElementById('playlist').innerHTML='Loading...';
+						      "> </input>
+	    <a href="$(d.path)"> $(d.path) </a>
+	  </li>
     </ul>
 
 
