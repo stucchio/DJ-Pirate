@@ -6,6 +6,7 @@ urls = ( '/', 'index',
          '/simpleajax/command/(.*)', 'command',
          '/simpleajax/playlist', 'playlist',
          '/simpleajax/playsong/([0-9]*)', 'playsong',
+         '/simpleajax/addsong/(.*)', 'addsong',
          '/viewdir/(.*)', 'viewdir',
          )
 
@@ -94,6 +95,11 @@ class viewdir:
     def GET(self,path):
         songs,dirs = lsinfo(path)
         print render.viewdir(songs,dirs)
+
+class addsong:
+    def GET(self,path):
+        get_mpd().add([path,])
+        print get_status_xml()
 
 
 if __name__ == "__main__":

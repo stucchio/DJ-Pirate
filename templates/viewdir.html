@@ -14,6 +14,9 @@ $def with (songs, dirs)
     <ul id="songlist">
       $for s in songs:
           <li>
+	    <input type="button" value="Add" onClick="addToPlaylist('$(s.path)');
+						      parent.playlist.document.getElementById('playlist').innerHTML='Loading...';
+						      "> </input>
           $if s.title != "" and s.artist != "":
               $(s.title), by $(s.artist)
 	  $else:
