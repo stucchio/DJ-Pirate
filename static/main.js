@@ -182,6 +182,20 @@ function updatePlaylistCallback(httpRequest, repeat, nowplaying, playlist) {
     }
 }
 
+function clearSong(song_elem){
+    song_elem.className = "selectedsong";
+    song_elem.ondblclick = "";
+    song_elem.innerHTML = "";
+}
+
+function move(songnum, dir){
+    swapSongXmlRequest(songnum,songnum+dir, parent.nowplaying.document, parent.playlist.document);
+    cur_song = document.getElementById("song"+(songnum));
+    targ_song = document.getElementById("song"+(songnum+dir));
+    clearSong(cur_song);
+    clearSong(targ_song);
+}
+
 function playSong(songnum){
     song = document.getElementById("song"+songnum);
     playSongXmlRequest(songnum, parent.nowplaying.document, document);
@@ -255,6 +269,35 @@ function removeSongXmlRequest(songnum, nowplaying, playlist) {
     httpRequest.send('');
 }
 
+function swapSongXmlRequest(song1,song2, nowplaying, playlist) {
+    var httpRequest;
+    nowplaying.getElementById("playingsong").innerHTML = "Loading...";
+    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+        httpRequest = new XMLHttpRequest();
+        if (httpRequest.overrideMimeType) {
+            httpRequest.overrideMimeType('text/xml');
+        }
+    }
+    else if (window.ActiveXObject) { // IE
+        try {
+            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e) {
+            try {
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch (e) {}
+        }
+    }
+
+    if (!httpRequest) {
+        alert('Giving up :( Cannot create an XMLHTTP instance');
+        return false;
+    }
+    httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,true, nowplaying,playlist); };
+    httpRequest.open('GET', '/simpleajax/swapsong/' + song1 + "/"+song2, true);
+    httpRequest.send('');
+}
 
 function stylePlaylist(songnum, selectedsong, doc) {
     var even = false;
