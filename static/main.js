@@ -26,7 +26,7 @@ function updateStatus(nowplaying, playlist) {
         return false;
     }
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,true, nowplaying,playlist); };
-    httpRequest.open('GET', '../simpleajax/status', true);
+    httpRequest.open('GET', '/simpleajax/status', true);
     httpRequest.send('');
 }
 
@@ -56,7 +56,7 @@ function runCommand(cmd){
         return false;
     }
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,false, document, parent.playlist.document); };
-    httpRequest.open('GET', '../simpleajax/command/' + cmd, true);
+    httpRequest.open('GET', '/simpleajax/command/' + cmd, true);
     httpRequest.send('');
 }
 
@@ -127,7 +127,7 @@ function updatePlaylist(nowplaying, playlist, repeat) {
         return false;
     }
     httpRequest.onreadystatechange = function() { updatePlaylistCallback(httpRequest, repeat, nowplaying, playlist); };
-    httpRequest.open('GET', '../simpleajax/playlist', true);
+    httpRequest.open('GET', '/simpleajax/playlist', true);
     httpRequest.send('');
 }
 
@@ -182,7 +182,7 @@ function playSongXmlRequest(songnum, nowplaying, playlist) {
         return false;
     }
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,true, nowplaying,playlist); };
-    httpRequest.open('GET', '../simpleajax/playsong/' + songnum, true);
+    httpRequest.open('GET', '/simpleajax/playsong/' + songnum, true);
     httpRequest.send('');
 }
 
