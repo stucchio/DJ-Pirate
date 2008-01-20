@@ -6,6 +6,7 @@ urls = ( '/', 'index',
          '/simpleajax/command/(.*)', 'command',
          '/simpleajax/playlist', 'playlist',
          '/simpleajax/playsong/([0-9]*)', 'playsong',
+         '/simpleajax/removesong/([0-9]*)', 'removesong',
          '/simpleajax/addsong/(.*)', 'addsong',
          '/viewdir/(.*)', 'viewdir',
          )
@@ -59,6 +60,12 @@ class playsong:
     def GET(self,songnum):
         get_mpd().play(int(songnum))
         print get_status_xml()
+
+class removesong:
+    def GET(self,songnum):
+        get_mpd().delete([int(songnum),])
+        print get_status_xml()
+
 
 class command:
     commands = [ "prev", "next", "shuffle", "stop", "clear"]
