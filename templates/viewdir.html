@@ -1,4 +1,4 @@
-$def with (songs, dirs)
+$def with (songs, dirs, parentdir)
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -9,6 +9,11 @@ $def with (songs, dirs)
     </script>
   </head>
   <body onLoad="updatePlaylist(parent.nowplaying.document, document, true);">
+
+    $if parentdir == "":
+        <p><a href="/viewdir/"> / (Root Directory == Parent Directory, Home) </a></p>
+    $else:
+        <p><a href="/viewdir/"> / (Root Directory, Home) </a>, <a href="/viewdir/$(parentdir)"> .. (Parent Directory) </a></p>
 
     <h2> Songs </h2>
     <ul id="songlist">
@@ -25,7 +30,11 @@ $def with (songs, dirs)
     </ul>
 
     <h2> Directories </h2>
-    <p><a href="/viewdir/"> / (Root Directory, Home) </a></p>
+    $if parentdir == "":
+        <p><a href="/viewdir/"> / (Root Directory == Parent Directory, Home) </a></p>
+    $else:
+        <p><a href="/viewdir/"> / (Root Directory, Home) </a>, <a href="/viewdir/$(parentdir)"> .. (Parent Directory) </a></p>
+
     <ul id="dirlist">
       $for d in dirs:
           <li>

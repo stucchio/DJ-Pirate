@@ -1,5 +1,6 @@
 import web
 import mpdclient
+import os
 
 urls = ( '/', 'index',
          '/simpleajax/status', 'status',
@@ -101,7 +102,7 @@ class command:
 class viewdir:
     def GET(self,path):
         songs,dirs = lsinfo(path)
-        print render.viewdir(songs,dirs)
+        print render.viewdir(songs,dirs, os.path.split(path)[0])
 
 class addsong:
     def GET(self,path):
