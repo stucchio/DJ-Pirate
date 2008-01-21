@@ -2,7 +2,6 @@ var playlistqueue = 0;
 
 function updateStatus(nowplaying, playlist) {
     var httpRequest = buildXmlHttpRequest();
-    nowplaying.getElementById("playingsong").innerHTML = "Loading...";
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,true, nowplaying,playlist); };
     httpRequest.open('GET', '/simpleajax/status', true);
     httpRequest.send('');
