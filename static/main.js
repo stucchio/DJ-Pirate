@@ -1,92 +1,22 @@
 var playlistqueue = 0;
 
 function updateStatus(nowplaying, playlist) {
-    var httpRequest;
+    var httpRequest = buildXmlHttpRequest();
     nowplaying.getElementById("playingsong").innerHTML = "Loading...";
-    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-        httpRequest = new XMLHttpRequest();
-        if (httpRequest.overrideMimeType) {
-            httpRequest.overrideMimeType('text/xml');
-        }
-    }
-    else if (window.ActiveXObject) { // IE
-        try {
-            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            try {
-                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            catch (e) {}
-        }
-    }
-
-    if (!httpRequest) {
-        alert('Giving up :( Cannot create an XMLHTTP instance');
-        return false;
-    }
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,true, nowplaying,playlist); };
     httpRequest.open('GET', '/simpleajax/status', true);
     httpRequest.send('');
 }
 
 function addToPlaylist(path){
-    var httpRequest;
-
-    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-        httpRequest = new XMLHttpRequest();
-        if (httpRequest.overrideMimeType) {
-            httpRequest.overrideMimeType('text/xml');
-        }
-    }
-    else if (window.ActiveXObject) { // IE
-        try {
-            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            try {
-                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            catch (e) {}
-        }
-    }
-
-    if (!httpRequest) {
-        alert('Giving up :( Cannot create an XMLHTTP instance');
-        return false;
-    }
+    var httpRequest = buildXmlHttpRequest();
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,false, parent.nowplaying.document, parent.playlist.document); };
     httpRequest.open('GET', '/simpleajax/addsong/' + path, true);
     httpRequest.send('');
-
-
 }
 
 function runCommand(cmd){
-    var httpRequest;
-
-    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-        httpRequest = new XMLHttpRequest();
-        if (httpRequest.overrideMimeType) {
-            httpRequest.overrideMimeType('text/xml');
-        }
-    }
-    else if (window.ActiveXObject) { // IE
-        try {
-            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            try {
-                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            catch (e) {}
-        }
-    }
-
-    if (!httpRequest) {
-        alert('Giving up :( Cannot create an XMLHTTP instance');
-        return false;
-    }
+    var httpRequest = buildXmlHttpRequest();
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,false, document, parent.playlist.document); };
     httpRequest.open('GET', '/simpleajax/command/' + cmd, true);
     httpRequest.send('');
@@ -134,45 +64,19 @@ function updateStatusCallback(httpRequest,repeat, nowplaying, playlist) {
 }
 
 function updatePlaylist(nowplaying, playlist, repeat) {
-    var httpRequest;
-    //document.getElementById("playlist").innerHTML = "Loading...";
-    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-        httpRequest = new XMLHttpRequest();
-        if (httpRequest.overrideMimeType) {
-            httpRequest.overrideMimeType('text/xml');
-        }
-    }
-    else if (window.ActiveXObject) { // IE
-        try {
-            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            try {
-                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            catch (e) {}
-        }
-    }
-
-    if (!httpRequest) {
-        alert('Giving up :( Cannot create an XMLHTTP instance');
-        return false;
-    }
+    var httpRequest = buildXmlHttpRequest();
     httpRequest.onreadystatechange = function() { updatePlaylistCallback(httpRequest, repeat, nowplaying, playlist); };
     httpRequest.open('GET', '/simpleajax/playlist', true);
     httpRequest.send('');
 }
 
 function updatePlaylistCallback(httpRequest, repeat, nowplaying, playlist) {
-
     if (httpRequest.readyState == 4) {
         if (httpRequest.status == 200) {
             playlist.getElementById("playlist").innerHTML = httpRequest.responseText;
-
             if (repeat){
                 setTimeout("updatePlaylist(parent.nowplaying.document, document, true);", 30000);
             }
-
         } else {
             playlist.getElementById("playlist").innerHTML = "Check your network connection";
             if (repeat){
@@ -208,10 +112,8 @@ function removeSong(songid,songnum){
     clearSong(song)
 }
 
-
-function playSongXmlRequest(songnum, nowplaying, playlist) {
+function buildXmlHttpRequest(){
     var httpRequest;
-    nowplaying.getElementById("playingsong").innerHTML = "Loading...";
     if (window.XMLHttpRequest) { // Mozilla, Safari, ...
         httpRequest = new XMLHttpRequest();
         if (httpRequest.overrideMimeType) {
@@ -234,31 +136,20 @@ function playSongXmlRequest(songnum, nowplaying, playlist) {
         alert('Giving up :( Cannot create an XMLHTTP instance');
         return false;
     }
+    return httpRequest;
+}
+
+function playSongXmlRequest(songnum, nowplaying, playlist) {
+    var httpRequest = buildXmlHttpRequest();
+    nowplaying.getElementById("playingsong").innerHTML = "Loading...";
+
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,true, nowplaying,playlist); };
     httpRequest.open('GET', '/simpleajax/playsong/' + songnum, true);
     httpRequest.send('');
 }
 
 function removeSongXmlRequest(songnum, nowplaying, playlist) {
-    var httpRequest;
-    nowplaying.getElementById("playingsong").innerHTML = "Loading...";
-    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-        httpRequest = new XMLHttpRequest();
-        if (httpRequest.overrideMimeType) {
-            httpRequest.overrideMimeType('text/xml');
-        }
-    }
-    else if (window.ActiveXObject) { // IE
-        try {
-            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            try {
-                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            catch (e) {}
-        }
-    }
+    var httpRequest = buildXmlHttpRequest();
 
     if (!httpRequest) {
         alert('Giving up :( Cannot create an XMLHTTP instance');
@@ -270,30 +161,9 @@ function removeSongXmlRequest(songnum, nowplaying, playlist) {
 }
 
 function swapSongXmlRequest(song1,song2, nowplaying, playlist) {
-    var httpRequest;
+    var httpRequest = buildXmlHttpRequest();
     nowplaying.getElementById("playingsong").innerHTML = "Loading...";
-    if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-        httpRequest = new XMLHttpRequest();
-        if (httpRequest.overrideMimeType) {
-            httpRequest.overrideMimeType('text/xml');
-        }
-    }
-    else if (window.ActiveXObject) { // IE
-        try {
-            httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            try {
-                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            catch (e) {}
-        }
-    }
 
-    if (!httpRequest) {
-        alert('Giving up :( Cannot create an XMLHTTP instance');
-        return false;
-    }
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,true, nowplaying,playlist); };
     httpRequest.open('GET', '/simpleajax/swapsong/' + song1 + "/"+song2, true);
     httpRequest.send('');
