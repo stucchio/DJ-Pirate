@@ -202,10 +202,10 @@ function playSong(songnum){
     stylePlaylist(-1,songnum,document);
 }
 
-function removeSong(songnum){
+function removeSong(songid,songnum){
+    removeSongXmlRequest(songid, parent.nowplaying.document, document);
     song = document.getElementById("song"+songnum);
-    removeSongXmlRequest(songnum, parent.nowplaying.document, document);
-    stylePlaylist(-1,songnum,document);
+    clearSong(song)
 }
 
 

@@ -65,7 +65,7 @@ class playsong:
 
 class removesong:
     def GET(self,songnum):
-        get_mpd().delete([int(songnum),])
+        get_mpd().deleteid([int(songnum),])
         print get_status_xml()
 
 class swapsong:

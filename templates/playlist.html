@@ -10,8 +10,6 @@ $for s in playlist:
             <li id="song$(s[0])" class="even" onDblClick="playSong($(s[0]));">
     <input type="button" value="&darr;" onClick="move($(s[0]),1)"> </input>
     <input type="button" value="&uarr;" onClick="move($(s[0]),-1)"> </input>
-    $(s[1].title), by $(s[1].artist).
-    <input type="button" value="Remove" onClick="removeSong($(s[0]));
-						 parent.playlist.document.getElementById('playlist').innerHTML='Loading...';
-						 "> </input>
+    $(s[1].title), by $(s[1].artist). $(s[1].song_id), $(s[1].pos)
+    <input type="button" value="Remove" onClick="removeSong($(s[1].song_id),$(s[0]));"> </input>
     </li>
