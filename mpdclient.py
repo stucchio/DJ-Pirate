@@ -233,6 +233,7 @@ class Song(InfoEntity):
   title    = ""
   album    = ""
   track    = ""
+  song_id  = ""
 
 
 def playerStateSwapType(state):
@@ -332,6 +333,8 @@ class MpdConnection(object):
   errorHandling  = RAISE_ERRORS
 
   _recvlimit = lambda self: MAX_BUFLEN - len(self.buf)
+
+  __song_items = ("artist", "album", "title", "track")
 
   def __init__(self, host="localhost", port=2100, timeout=20):
     self.host = host
@@ -539,11 +542,12 @@ class MpdConnection(object):
       if name in ("file", "directory", "playlist"):
         return entity
 
+      lname = name.lower()#Make property lowercase
       if isinstance(entity, Song) and len(value):
-        for item in ("artist", "album", "title", "track"):
-          if name == item.capitalize() and not getattr(entity, item):
-            setattr(entity, item, value)
-            break
+        if lname == "id":
+          setattr(entity, "song_id", value)
+        if lname in self.__song_items:
+          setattr(entity, lname, value)
 
       self.getNextReturnElement()
 
