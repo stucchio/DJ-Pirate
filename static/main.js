@@ -185,13 +185,13 @@ function updatePlaylistCallback(httpRequest, repeat, nowplaying, playlist) {
 function clearSong(song_elem){
     song_elem.className = "selectedsong";
     song_elem.ondblclick = "";
-    song_elem.innerHTML = "";
+    song_elem.innerHTML = "Loading...";
 }
 
 function move(songnum, dir){
-    swapSongXmlRequest(songnum,songnum+dir, parent.nowplaying.document, parent.playlist.document);
+    swapSongXmlRequest(songnum,parseInt(songnum)+parseInt(dir), parent.nowplaying.document, parent.playlist.document);
     cur_song = document.getElementById("song"+(songnum));
-    targ_song = document.getElementById("song"+(songnum+dir));
+    targ_song = document.getElementById("song"+(parseInt(songnum)+parseInt(dir)));
     clearSong(cur_song);
     clearSong(targ_song);
 }
