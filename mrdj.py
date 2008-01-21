@@ -108,6 +108,12 @@ class command:
 class viewdir:
     def GET(self,path):
         songs,dirs = lsinfo(path)
+        for d in dirs: #Add javascript-escaped versions of the path.
+            d.pathEsc = d.path.replace("'","\\'")
+            d.pathEsc = d.pathEsc.replace("\"","\\\"")
+        for s in songs:
+            s.pathEsc = s.path.replace("'","\\'")
+            s.pathEsc = s.pathEsc.replace("\"","\\\"")
         print render.viewdir(songs,dirs, os.path.split(path)[0])
 
 class addsong:
