@@ -120,8 +120,8 @@ function updateStatusCallback(httpRequest,repeat, nowplaying, playlist) {
 		updatePlaylist(nowplaying, playlist, false);
 	    }
 
-            if (repeat){ //Now try this again in 20,000 microseconds
-                setTimeout("updateStatus(document, parent.playlist.document);", 20000);
+            if (repeat){ //Now try this again in 10,000 microseconds
+                setTimeout("updateStatus(document, parent.playlist.document);", 10000);
             }
 
         } else {
