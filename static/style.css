@@ -24,3 +24,5 @@ playingsong { font-weight: bold;
 	      text-transform: capitalize;
 	      font-size: 130%;
 }
+
+.floatright { float: right; margin: 0px 0px 5px 5px; }
