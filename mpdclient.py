@@ -430,6 +430,9 @@ class MpdConnection(object):
   def sendDeleteCommand(self, songNum):
     self.executeCommand('delete "%d"' % songNum)
 
+  def sendDeleteIdCommand(self, songId):
+    self.executeCommand('deleteid "%d"' % songId)
+
   def sendAddCommand(self, filename):
     self.executeCommand('add "%s"' % _sanitizeArg(filename))
 
@@ -1061,6 +1064,34 @@ class MpdController(MpdConnection):
       self.sendCommandListEnd()
 
     return len(todelete)
+
+  def deleteid(self, nums):
+    """
+    delete(nums)
+
+    Each item in nums must be a song_id. The song with that song_id will be deleted from the playlist.
+    Any other argument will raise a ValueError.
+
+    This is essentially the "deleteid" mpc action
+
+    Return value is the number of songs deleted.
+    """
+
+    # make sure they're all valid
+
+    for thing in nums:
+      if not isinstance(thing,int):
+        raise ValueError, "nums must be integers"
+
+    self.sendCommandListBegin()
+    try:
+      for n in nums:
+        self.sendDeleteIdCommand(n)
+
+    finally:
+      self.sendCommandListEnd()
+
+    return len(nums)
 
   def playlist(self):
     """
