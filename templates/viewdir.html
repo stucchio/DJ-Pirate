@@ -19,9 +19,7 @@ $def with (songs, dirs, parentdir)
     <ul id="songlist">
       $for s in songs:
           <li>
-	    <input type="button" value="Add" onClick="addToPlaylist('$(s.path)');
-						      parent.playlist.document.getElementById('playlist').innerHTML='Loading...';
-						      "> </input>
+	    <input type="button" value="Add" onClick="addToPlaylist('$(s.path)');"> </input>
           $if s.title != "" and s.artist != "":
               $(s.title), by $(s.artist)
 	  $else:
@@ -38,9 +36,7 @@ $def with (songs, dirs, parentdir)
     <ul id="dirlist">
       $for d in dirs:
           <li>
-	    <input type="button" value="Add" onClick="addToPlaylist('$(d.path)');
-						      parent.playlist.document.getElementById('playlist').innerHTML='Loading...';
-						      "> </input>
+	    <input type="button" value="Add" onClick="addToPlaylist('$(d.path)');"> </input>
 	    <a href="$(d.path)"> $(d.path) </a>
 	  </li>
     </ul>
