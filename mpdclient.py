@@ -334,7 +334,7 @@ class MpdConnection(object):
 
   _recvlimit = lambda self: MAX_BUFLEN - len(self.buf)
 
-  __song_items = ("artist", "album", "title", "track")
+  __song_items = ("artist", "album", "title", "track", "pos")
 
   def __init__(self, host="localhost", port=2100, timeout=20):
     self.host = host
