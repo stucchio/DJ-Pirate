@@ -146,6 +146,7 @@ class Status(object):
   "Class representing the status of the player at a given point in time."
 
   volume         = -10
+  bitrate        = -1
   repeat         = -1
   random         = -1
   playlistLength = -1
@@ -164,7 +165,7 @@ class ReturnElement(object):
   r"""
   A class representing an element given back by mpd.  For example:
 
-    % printf 'status\n' | nc localhost 2100
+    % printf 'status\n' | nc localhost 6600
     OK MPD 0.9.0
     volume: 80
     repeat: 0
@@ -307,7 +308,7 @@ def _versionOk(ver):
 
 class MpdConnection(object):
   """
-  MpdConnection([host="localhost"[, port=2100[, timeout=20]]])
+  MpdConnection([host="localhost"[, port=6600[, timeout=20]]])
 
   This is basically the C mpd_Connection struct, merged with all of the
   C functions that acted upon it, in a single class, with of course some
@@ -336,7 +337,7 @@ class MpdConnection(object):
 
   __song_items = ("artist", "album", "title", "track", "pos")
 
-  def __init__(self, host="localhost", port=2100, timeout=20):
+  def __init__(self, host="localhost", port=6600, timeout=20):
     self.host = host
     self.port = port
     self.timeout = timeout
@@ -588,6 +589,9 @@ class MpdConnection(object):
         else:
           status.volume = int(val)
 
+      elif name == "bitrate":
+        status.bitrate = int(val)
+
       elif name == "playlistlength":
         status.playlistLength = int(val)
 
@@ -774,7 +778,7 @@ class MpdController(MpdConnection):
   For each environment variable in $MPD_HOST and $MPD_PORT, if the
   corresponding parameter is not explicitly passed to the constructor of this
   class, the environment variable will be used, if set.  If not set, then the
-  defaults will be used ("localhost" and 2100, respectively).
+  defaults will be used ("localhost" and 6600, respectively).
   """
 
   def __init__(self, host=False, port=False, *args):
@@ -783,7 +787,7 @@ class MpdController(MpdConnection):
       host = os.environ.get("MPD_HOST", "localhost")
 
     if port is False:
-      port = int(os.environ.get("MPD_PORT", "2100"))
+      port = int(os.environ.get("MPD_PORT", "6600"))
 
     MpdConnection.__init__(self, host, port, *args)
 
