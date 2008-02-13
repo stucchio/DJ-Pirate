@@ -1,6 +1,7 @@
 import web
 import mpdclient
 import os
+from xml.sax import saxutils
 
 urls = ( '/', 'index',
          '/simpleajax/status', 'status',
@@ -23,13 +24,13 @@ def get_status_xml():
     mpd_status = get_mpd().status()
     status_str = "<?xml version=\"1.0\" ?> \n<root>\n"
     if song:
-        status_str += "<currentsong>" + song.title + ", by " + song.artist + "</currentsong>\n"
+        status_str += "<currentsong>" + saxutils.escape(song.title) + ", by " + saxutils.escape(song.artist) + "</currentsong>\n"
     else:
         status_str += "<currentsong>" + "No song playing" + "</currentsong>\n"
-    status_str += "<state>"+ str(mpd_status.state) + "</state>\n"
-    status_str += "<volume>" + str(mpd_status.volume) + "</volume>\n"
-    status_str += "<playlistqueue>" + str(mpd_status.playlist) + "</playlistqueue>\n"
-    status_str += "<playlistposition>" + str(get_mpd().getPlaylistPosition()[0]) + "</playlistposition>\n"
+    status_str += "<state>"+ saxutils.escape(str(mpd_status.state)) + "</state>\n"
+    status_str += "<volume>" + saxutils.escape(str(mpd_status.volume)) + "</volume>\n"
+    status_str += "<playlistqueue>" + saxutils.escape(str(mpd_status.playlist)) + "</playlistqueue>\n"
+    status_str += "<playlistposition>" + saxutils.escape(str(get_mpd().getPlaylistPosition()[0])) + "</playlistposition>\n"
     status_str += "</root>\n"
     return status_str
 
