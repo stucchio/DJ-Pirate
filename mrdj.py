@@ -110,11 +110,9 @@ class viewdir:
     def GET(self,path):
         songs,dirs = lsinfo(path)
         for d in dirs: #Add javascript-escaped versions of the path.
-            d.pathEsc = d.path.replace("'","\\'")
-            d.pathEsc = d.pathEsc.replace("\"","\\\"")
+            d.pathEsc = saxutils.escape(d.path)
         for s in songs:
-            s.pathEsc = s.path.replace("'","\\'")
-            s.pathEsc = s.pathEsc.replace("\"","\\\"")
+            s.pathEsc = saxutils.escape(s.path)
         print render.viewdir(songs,dirs, os.path.split(path)[0])
 
 class addsong:
