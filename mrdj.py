@@ -24,7 +24,10 @@ def get_status_xml():
     mpd_status = get_mpd().status()
     status_str = "<?xml version=\"1.0\" ?> \n<root>\n"
     if song:
-        status_str += "<currentsong>" + saxutils.escape(song.title) + ", by " + saxutils.escape(song.artist) + "</currentsong>\n"
+        if song.title.strip() != "" and song.artist.strip() != "": #If title and artist of current song are not whitespace, then return them
+            status_str += "<currentsong>" + saxutils.escape(song.title) + ", by " + saxutils.escape(song.artist) + "</currentsong>\n"
+        else: #Otherwise just return the path
+            status_str += "<currentsong>" + saxutils.escape(song.path) + "</currentsong>\n"
     else:
         status_str += "<currentsong>" + "No song playing" + "</currentsong>\n"
     status_str += "<state>"+ saxutils.escape(str(mpd_status.state)) + "</state>\n"
