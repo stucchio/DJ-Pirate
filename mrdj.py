@@ -38,8 +38,10 @@ def get_status_xml():
     return status_str
 
 def get_playist_xml():
-    playlist = get_mpd().playlist()
-    return render.playlist(enumerate(playlist), get_mpd().getPlaylistPosition()[0])
+    mpd = get_mpd()
+    playlist = mpd.playlist()
+    position = mpd.getPlaylistPosition()[0]
+    return render.playlist(enumerate(playlist), position)
 
 def lsinfo(path):
     songs,dirs = [], []
