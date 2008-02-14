@@ -81,7 +81,7 @@ class swapsong:
 
 
 class command:
-    commands = [ "prev", "next", "shuffle", "stop", "clear"]
+    commands = [ "prev", "next", "shuffle", "stop", "clear", "update"]
     tougher_commands = [ "voldown", "volup", "pause", "play"]
 
     def GET(self,command):
