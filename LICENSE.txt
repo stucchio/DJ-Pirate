@@ -2,7 +2,10 @@ The file dancing_skel is public domain, and is taken from here:
 
 http://openclipart.org/media/files/johnny_automatic/5190
 
-If in fact, dancing_skel is not GPL, please let me know, I'll remove it.
+The pirate cat is taken from here.
+http://openclipart.org/media/files/antontw/4135
+
+If any of the art is not compatible with GPL, let me know.
 
 The contents of web/ are public domain. This is in fact a direct copy of
 web.py, and is taken from
