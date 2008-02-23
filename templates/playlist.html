@@ -15,5 +15,5 @@ $for s in playlist:
         $(s[1].title), by $(s[1].artist)
     $else:
         $(s[1].pathEsc)
-    <input type="button" value="Remove" onClick="removeSong($(s[1].song_id),$(s[0]));"> </input>
+    <input type="button" value="X" onClick="removeSong($(s[1].song_id),$(s[0]));"> </input>
     </li>
