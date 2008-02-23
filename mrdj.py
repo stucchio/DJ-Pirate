@@ -128,8 +128,9 @@ class search:
         title_matches = clean_paths(get_mpd().search_for_songs("title",word))
         artist_matches = clean_paths(get_mpd().search_for_songs("artist",word))
         album_matches = clean_paths(get_mpd().search_for_songs("album",word))
-        if title_matches or artist_matches or album_matches:
-            print render.searchresults(title_matches, artist_matches, album_matches, word)
+        filename_matches = clean_paths(get_mpd().search_for_songs("filename",word))
+        if title_matches or artist_matches or album_matches or filename_matches:
+            print render.searchresults(title_matches, artist_matches, album_matches, filename_matches, word)
         else:
             print render.searchnotfound(word)
 

@@ -1,4 +1,4 @@
-$def with (title_matches, artist_matches, album_matches, word)
+$def with (title_matches, artist_matches, album_matches, filename_matches, word)
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -49,6 +49,20 @@ $def with (title_matches, artist_matches, album_matches, word)
                   $(s.path)
     	  </li>
         </ul>
+
+    $if filename_matches != []:
+        <h2> Filename Matches </h2>
+        <ul id="songlist">
+          $for s in filename_matches:
+              <li>
+              <input type="button" value="Add" onClick="addToPlaylist('$:(s.pathEsc)');"> </input>
+              $if s.title != "" and s.artist != "":
+                  $(s.title), by $(s.artist)
+              $else:
+                  $(s.path)
+    	  </li>
+        </ul>
+
 
     <a href="/viewdir/" target="search">Browse Songs</a>
   </body>
