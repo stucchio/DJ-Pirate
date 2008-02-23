@@ -12,6 +12,7 @@ urls = ( '/', 'index',
          '/simpleajax/swapsong/([0-9]*)/([0-9]*)', 'swapsong',
          '/simpleajax/addsong/(.*)', 'addsong',
          '/viewdir/(.*)', 'viewdir',
+         '/search', 'search',
          )
 
 render = web.template.render('templates/')
@@ -120,6 +121,17 @@ class viewdir:
     def GET(self,path):
         songs,dirs = lsinfo(path)
         print render.viewdir(clean_paths(songs),clean_paths(dirs), os.path.split(path)[0])
+
+class search:
+    def POST(self):
+        word = web.input().word
+        title_matches = clean_paths(get_mpd().search_for_songs("title",word))
+        artist_matches = clean_paths(get_mpd().search_for_songs("artist",word))
+        album_matches = clean_paths(get_mpd().search_for_songs("album",word))
+        if title_matches or artist_matches or album_matches:
+            print render.searchresults(title_matches, artist_matches, album_matches, word)
+        else:
+            print render.searchnotfound(word)
 
 class addsong:
     def GET(self,path):

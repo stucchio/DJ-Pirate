@@ -1,0 +1,30 @@
+$def with (word)
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="static/style.css" />
+    <title>Mr. D.J. (View Directory)</title>
+    <script src="/static/main.js" type="text/javascript">
+    </script>
+  </head>
+  <body>
+
+    <h2> Sorry </h2>
+    <p>I don't think I have anything by $word. No songs of that title either, or anything with that type of album.</p>
+
+    <h2> Try Again? </h2>
+
+    <p>
+      <form method="post" action="/search" target="search">
+	<input type="text" name="word" />
+	<input type="submit" value="search"/>
+      </form>
+    </p>
+
+    <a href="/viewdir/" target="search">Browse Songs</a>
+
+
+
+  </body>
+</html>

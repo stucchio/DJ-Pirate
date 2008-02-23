@@ -9,37 +9,49 @@
   </head>
   <body onLoad="updateStatus(document, parent.playlist.document);">
 
-	  <img src="/static/dancing_skel.png " class="floatright"></img>
+    <img src="/static/dancing_skel.png " class="floatright"></img>
     <playingsong id="playingsong">Loading...</playingsong>
-      <table>
+    <table>
       <tr>
-	<td> <input type="button" value="Previous" onClick="runCommand('prev'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
-	<td> <input type="button" id="playpausebutton" value="Play/Pause" onClick="runCommand('pause'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
-	<td> <input type="button" value="Next" onClick="runCommand('next'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
-	<td> <input type="button" value="Stop" onClick="runCommand('stop'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
-      </tr>
-      </table>
-      <table>
-      <tr>
-	<td> <input type="button" value="-" onClick="runCommand('voldown');"> </input> </td>
-	<td> <input type="button" value="+" onClick="runCommand('volup');"> </input> </td>
-	<td> <volume id="volume"> Loading...</volume> % </td>
-      </tr>
-      </table>
-      <table>
-      <tr>
-	<td> <input type="button" value="Shuffle" onClick="runCommand('shuffle');
-							   parent.playlist.document.getElementById('playlist').innerHTML='Shuffling...';
-							   updatePlaylist(document, parent.playlist.document, false);
-							   "> </input> </td>
-	<td> <input type="button" value="Clear" onClick="runCommand('clear');
-							 parent.playlist.document.getElementById('playlist').innerHTML='Shuffling...';
-							 updatePlaylist(document, parent.playlist.document, false);
-							 "> </input> </td>
-	<td> <input type="button" value="Update" onClick="runCommand('update');
-							  "> </input> </td>
-      </tr>
-      </table>
+        <td>
+          <table>
+            <tr>
+              <td> <input type="button" value="Previous" onClick="runCommand('prev'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
+              <td> <input type="button" id="playpausebutton" value="Play/Pause" onClick="runCommand('pause'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
+              <td> <input type="button" value="Next" onClick="runCommand('next'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
+              <td> <input type="button" value="Stop" onClick="runCommand('stop'); document.getElementById('playingsong').innerHTML = 'Loading...';"> </input> </td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td> <input type="button" value="-" onClick="runCommand('voldown');"> </input> </td>
+              <td> <input type="button" value="+" onClick="runCommand('volup');"> </input> </td>
+              <td> <volume id="volume"> Loading...</volume> % </td>
+            </tr>
+          </table>
 
+          <table>
+            <tr>
+              <td> <input type="button" value="Shuffle" onClick="runCommand('shuffle');
+                                                                 parent.playlist.document.getElementById('playlist').innerHTML='Shuffling...';
+                                                                 updatePlaylist(document, parent.playlist.document, false);
+                                                                 "> </input> </td>
+              <td> <input type="button" value="Clear" onClick="runCommand('clear');
+                                                               parent.playlist.document.getElementById('playlist').innerHTML='Shuffling...';
+                                                               updatePlaylist(document, parent.playlist.document, false);
+                                                               "> </input> </td>
+              <td> <input type="button" value="Update" onClick="runCommand('update');
+                                                                "> </input> </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <form method="post" action="/search" target="search">
+	    <input type="text" name="word" />
+	    <input type="submit" value="search"/>
+          </form>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
