@@ -8,11 +8,11 @@
 	}
 
 #playlist li.even {
-    background-color: rgb(255,255,255);
+    background-color: rgb(245,245,255);
 	}
 
 #playlist li.odd {
-    background-color: rgb(220,220,240);
+    background-color: rgb(230,230,240);
 	}
 
 
@@ -59,7 +59,7 @@ playingsong { font-weight: bold;
 }
 
 #albumlist li.even {
-    background-color: rgb(255,255,255);
+    background-color: rgb(255,240,255);
 	}
 
 #albumlist li.odd {
