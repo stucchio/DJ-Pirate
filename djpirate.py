@@ -121,7 +121,7 @@ class command:
 class viewdir:
     def GET(self,path):
         songs,dirs = lsinfo(path)
-        print render.viewdir(clean_paths(songs),clean_paths(dirs), os.path.split(path)[0])
+        print render.viewdir(clean_paths(songs),clean_paths(dirs), os.path.split(path)[0], "/" + path)
 
 class search:
     def POST(self):

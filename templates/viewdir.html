@@ -1,4 +1,4 @@
-$def with (songs, dirs, parentdir)
+$def with (songs, dirs, parentdir, currentdir)
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -15,6 +15,7 @@ $def with (songs, dirs, parentdir)
     $else:
         <p><a href="/viewdir/"> / (Root Directory, Home) </a>, <a href="/viewdir/$:(parentdir)"> .. (Parent Directory) </a></p>
 
+    <h1> $(currentdir) </h1>
     $if songs != []:
         <h2> Songs </h2>
         <ul id="songlist">
