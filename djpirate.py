@@ -11,6 +11,7 @@ urls = ( '/', 'index',
          '/simpleajax/removesong/([0-9]*)', 'removesong',
          '/simpleajax/swapsong/([0-9]*)/([0-9]*)', 'swapsong',
          '/simpleajax/addsong/(.*)', 'addsong',
+         '/simpleajax/addplaysong/(.*)', 'addplaysong',
          '/viewdir/(.*)', 'viewdir',
          '/search', 'search',
          )
@@ -146,6 +147,12 @@ class addsong:
     def GET(self,path):
         get_mpd().add([path,])
         print get_status_xml()
+
+class addplaysong:
+    def GET(self,path):
+        get_mpd().add([path,])
+        mpd_status = get_mpd().status()
+        get_mpd().play(mpd_status.playlistLength-1)
 
 
 if __name__ == "__main__":

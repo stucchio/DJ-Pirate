@@ -14,6 +14,14 @@ function addToPlaylist(path){
     httpRequest.send('');
 }
 
+function addToPlaylistPlay(path){
+    var httpRequest = buildXmlHttpRequest();
+    httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,false, parent.nowplaying.document, parent.playlist.document); };
+    httpRequest.open('GET', '/simpleajax/addplaysong/' + path, true);
+    httpRequest.send('');
+}
+
+
 function runCommand(cmd){
     var httpRequest = buildXmlHttpRequest();
     httpRequest.onreadystatechange = function() { updateStatusCallback(httpRequest,false, document, parent.playlist.document); };

@@ -60,6 +60,7 @@ $def with (title_matches, artist_matches, album_matches, filename_matches, word)
           $for s in filename_matches:
               <li>
               <input type="button" value="Add" onClick="addToPlaylist('$:(s.pathEscJS)');"> </input>
+	      <input type="button" value="Play" onClick="addToPlaylistPlay('$:(s.pathEscJS)');"> </input>
               $if s.title != "" and s.artist != "":
                   $(s.title), by $(s.artist) ($(s.pathEsc))
               $else:
