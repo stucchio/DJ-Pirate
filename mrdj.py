@@ -52,6 +52,11 @@ def lsinfo(path):
             dirs += [s,]
     return songs,dirs
 
+def clean_paths(lst):
+    for o in lst:
+        o.pathEsc = saxutils.escape(o.path)
+    return lst
+
 class index:
     def GET(self):
         web.seeother("static/frames.html")
@@ -114,11 +119,7 @@ class command:
 class viewdir:
     def GET(self,path):
         songs,dirs = lsinfo(path)
-        for d in dirs: #Add javascript-escaped versions of the path.
-            d.pathEsc = saxutils.escape(d.path)
-        for s in songs:
-            s.pathEsc = saxutils.escape(s.path)
-        print render.viewdir(songs,dirs, os.path.split(path)[0])
+        print render.viewdir(clean_paths(songs),clean_paths(dirs), os.path.split(path)[0])
 
 class addsong:
     def GET(self,path):
