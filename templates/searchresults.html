@@ -21,6 +21,8 @@ $def with (title_matches, artist_matches, album_matches, filename_matches, word)
                   $(s.title), by $(s.artist)
               $else:
     	          $(s.path)
+              .
+              <a href="/viewdir/$(s.basepath)">(More)</a>
     	  </li>
         </ul>
 
@@ -34,6 +36,7 @@ $def with (title_matches, artist_matches, album_matches, filename_matches, word)
                   $(s.title), by $(s.artist)
               $else:
                   $(s.path)
+              <a href="/viewdir/$(s.basepath)">(More)</a>
     	  </li>
         </ul>
 
@@ -47,6 +50,7 @@ $def with (title_matches, artist_matches, album_matches, filename_matches, word)
                   $(s.title), by $(s.artist)
               $else:
                   $(s.path)
+              <a href="/viewdir/$(s.basepath)">(More)</a>
     	  </li>
         </ul>
 
@@ -60,6 +64,7 @@ $def with (title_matches, artist_matches, album_matches, filename_matches, word)
                   $(s.title), by $(s.artist)
               $else:
                   $(s.path)
+              <a href="/viewdir/$(s.basepath)">(More)</a>
     	  </li>
         </ul>
 
