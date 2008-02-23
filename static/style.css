@@ -26,3 +26,55 @@ playingsong { font-weight: bold;
 }
 
 .floatright { float: right; margin: 0px 0px 5px 5px; }
+
+#artistlist li {
+    padding: 3px 8px;
+    border-left: 1px solid #D9D9D9;
+}
+
+#artistlist li.even {
+    background-color: rgb(240,255,240);
+	}
+
+#artistlist li.odd {
+    background-color: rgb(220,240,220);
+	}
+
+#titlelist li {
+    padding: 3px 8px;
+    border-left: 1px solid #D9D9D9;
+}
+
+#titlelist li.even {
+    background-color: rgb(255,255,255);
+	}
+
+#titlelist li.odd {
+    background-color: rgb(230,230,240);
+	}
+
+#albumlist li {
+    padding: 3px 8px;
+    border-left: 1px solid #D9D9D9;
+}
+
+#albumlist li.even {
+    background-color: rgb(255,255,255);
+	}
+
+#albumlist li.odd {
+    background-color: rgb(240,220,240);
+	}
+
+#filenamelist li {
+    padding: 3px 8px;
+    border-left: 1px solid #D9D9D9;
+}
+
+#filenamelist li.even {
+    background-color: rgb(255,240,240);
+	}
+
+#filenamelist li.odd {
+    background-color: rgb(240,220,220);
+	}

@@ -8,12 +8,12 @@ $def with (title_matches, artist_matches, album_matches, filename_matches, word)
     <script src="/static/main.js" type="text/javascript">
     </script>
   </head>
-  <body onLoad="updatePlaylist(parent.nowplaying.document, document, true);">
+  <body onload="zebralist('artistlist', document); zebralist('titlelist', document); zebralist('albumlist', document); zebralist('filenamelist', document);">
 
     <a href="/viewdir/" target="search">Browse Songs</a>
     $if title_matches != []:
         <h2> Title Matches </h2>
-        <ul id="songlist">
+        <ul id="titlelist">
           $for s in title_matches:
               <li>
     	      <input type="button" value="Add" onClick="addToPlaylist('$:(s.pathEsc)');"> </input>
@@ -28,7 +28,7 @@ $def with (title_matches, artist_matches, album_matches, filename_matches, word)
 
     $if artist_matches != []:
         <h2> Artist Matches </h2>
-        <ul id="songlist">
+        <ul id="artistlist">
           $for s in artist_matches:
               <li>
               <input type="button" value="Add" onClick="addToPlaylist('$:(s.pathEsc)');"> </input>
@@ -42,7 +42,7 @@ $def with (title_matches, artist_matches, album_matches, filename_matches, word)
 
     $if album_matches != []:
         <h2> Album Matches </h2>
-        <ul id="songlist">
+        <ul id="albumlist">
           $for s in album_matches:
               <li>
               <input type="button" value="Add" onClick="addToPlaylist('$:(s.pathEsc)');"> </input>
@@ -56,14 +56,14 @@ $def with (title_matches, artist_matches, album_matches, filename_matches, word)
 
     $if filename_matches != []:
         <h2> Filename Matches </h2>
-        <ul id="songlist">
+        <ul id="filenamelist">
           $for s in filename_matches:
               <li>
               <input type="button" value="Add" onClick="addToPlaylist('$:(s.pathEsc)');"> </input>
               $if s.title != "" and s.artist != "":
-                  $(s.title), by $(s.artist)
+                  $(s.title), by $(s.artist) ($(s.pathEsc))
               $else:
-                  $(s.path)
+                  $(s.pathEsc)
               <a href="/viewdir/$(s.basepath)">(More)</a>
     	  </li>
         </ul>
