@@ -72,7 +72,7 @@ function updatePlaylist(nowplaying, playlist, repeat) {
 function updatePlaylistCallback(httpRequest, repeat, nowplaying, playlist) {
     if (httpRequest.readyState == 4) {
         if (httpRequest.status == 200) {
-            playlist.getElementById("playlist").innerHTML = httpRequest.responseText;
+            playlist.getElementById("playlist").innerHTML = fixPlaylistBrowserSpecific(httpRequest.responseText);
             if (repeat){
                 setTimeout("updatePlaylist(parent.nowplaying.document, document, true);", 30000);
             }
@@ -207,3 +207,12 @@ function zebralist(id,doc) {
     }
 }
 
+
+function fixPlaylistBrowserSpecific(s){
+    if (navigator.appName == "Microsoft Internet Explorer" && navigator.platform == "Linux")
+    {	//This function kills the &#x25B6 character, which doesn't display right on N800 (i.e. "Internet Explorer" on "Linux")
+	return s.replace(/&#x25B6;/g,"Play");
+    }else{
+	return s;
+    }
+}
