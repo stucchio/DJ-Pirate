@@ -130,13 +130,9 @@ class search:
         album_matches = clean_paths(get_mpd().search_for_songs("album",word))
         filename_matches = clean_paths(get_mpd().search_for_songs("filename",word))
 
-        #Any object in title or artist matches should removed from album matches
-        song_ids = [s.song_id for s in title_matches] + [s.song_id for s in artist_matches]
-        album_matches = [s for s in album_matches if not (s.song_id in song_ids)]
+        song_ids = [s.path for s in title_matches] + [s.path for s in artist_matches] + [s.path for s in album_matches]
+        filename_matches = [s for s in filename_matches if not (s.path in song_ids)]
 
-        #If any element of filename_matches is also found anywhere else, remove it
-        song_ids += [s.song_id for s in album_matches]
-        filename_matches = [s for s in filename_matches if not (s.song_id in song_ids)]
 
         for s in title_matches + artist_matches + album_matches + filename_matches: #The basepath is the path to the directory containing the file.
             s.basepath = saxutils.escape(os.path.dirname(s.path))
