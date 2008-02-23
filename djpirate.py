@@ -56,6 +56,7 @@ def lsinfo(path):
 def clean_paths(lst):
     for o in lst:
         o.pathEsc = saxutils.escape(o.path)
+        o.pathEscJS = o.pathEsc.replace("'","\\'")
     return lst
 
 class index:
