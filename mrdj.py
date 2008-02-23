@@ -42,7 +42,7 @@ def get_playist_xml():
     mpd = get_mpd()
     playlist = mpd.playlist()
     position = mpd.getPlaylistPosition()[0]
-    return render.playlist(enumerate(playlist), position)
+    return render.playlist(enumerate(clean_paths(playlist)), position)
 
 def lsinfo(path):
     songs,dirs = [], []
