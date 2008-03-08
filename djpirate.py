@@ -52,6 +52,7 @@ def lsinfo(path):
             songs += [s,]
         if isinstance(s,mpdclient.Directory):
             dirs += [s,]
+    dirs.sort(key=lambda d: d.path.lower())
     return songs,dirs
 
 def clean_paths(lst):
