@@ -156,6 +156,6 @@ class addplaysong:
         get_mpd().play(mpd_status.playlistLength-1)
 
 
-if __name__ == "__main__":
+def runserver():
     web.webapi.internalerror = web.debugerror
     web.run(urls, globals(),web.reloader)
