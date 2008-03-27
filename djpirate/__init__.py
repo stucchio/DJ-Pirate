@@ -18,7 +18,7 @@ urls = ( '/', 'index',
 
 render = web.template.render('templates/')
 
-def get_mpd(host="192.168.1.5", port="6600"):
+def get_mpd(host="127.0.0.1", port="6600"):
     return mpdclient.MpdController(host=host,port=6600)
 
 def get_status_xml():
