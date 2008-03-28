@@ -331,7 +331,7 @@ class MpdConnection(object):
   timeout        = 0
   response       = ""
   error          = None
-  errorHandling  = RAISE_ERRORS
+  errorHandling  = STORE_ERRORS
 
   _recvlimit = lambda self: MAX_BUFLEN - len(self.buf)
 
