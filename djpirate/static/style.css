@@ -78,3 +78,10 @@ playingsong { font-weight: bold;
 #filenamelist li.odd {
     background-color: rgb(240,220,220);
 	}
+
+#nowplaying {
+    background-image: url('dancing_skel.png');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:right;
+}
