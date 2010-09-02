@@ -39,22 +39,25 @@ FAQ
 ===
 
 How do I turn it off?
+---------------------
+::
 
-killall start_djpirate.py
+    killall start_djpirate.py
 
 This is ugly. Can I change it?
+------------------------------
 
 Look in the djpirate module in your python library. There are folders “templates” and “static”. You can modify the html/templates.
 
 I found a bug.
+--------------
 
-Ok, email me about it. Feel free to send a patch.
-
-
+Ok, email me about it. Feel free to send a patch. stucchio@gmail.com
 
 Don’t other programs like this exist?
+-------------------------------------
 
 Yes. I wrote this one for the following reasons:
-I wanted to learn how to write a webapp.
-I couldn’t figure out how to make most of the others work (but I didn’t put a lot of effort in).
-phpMp is ugly.
+* I wanted to learn how to write a webapp.
+* I couldn’t figure out how to make most of the others work (but I didn’t put a lot of effort in).
+* phpMp is ugly (but otherwise very functional).
