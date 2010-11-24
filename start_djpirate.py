@@ -1,4 +1,4 @@
-#!/Library/Frameworks/Python.framework/Versions/Current/bin/python
+#!/usr/bin/env python
 
 import djpirate
 import os               # Miscellaneous OS interfaces.
